@@ -64,7 +64,7 @@ def merge_yaml_files(input_directory, output_file, comment=None):
 
 
 if __name__ == "__main__":
-    input_dir = "contexts"
+    input_dir = "data"
     output_file = "merged-contexts-metadata.yaml"
     comment = "This is the automatically merged metadata. Please do not modify it directly."
     merge_yaml_files(input_dir, output_file, comment)

@@ -24,7 +24,7 @@ example, in Python 3 you could do:
 ```python
 import urllib.request
 
-url = "https://github.com/fcatools/contexts/raw/main/contexts/living-beings-and-water/livingbeings_en.cxt"
+url = "https://github.com/fcatools/contexts/raw/main/contexts/livingbeings_en.cxt"
 context = urllib.request.urlopen(url).read().decode("utf-8")
 ```
 
@@ -42,7 +42,7 @@ If you think your context is suitable, then proceed as follows:
 
 1. [Fork this repository](https://github.com/fcatools/contexts/fork)
    and make the following changes in your fork:
-   1. Add a subfolder to the [contexts](https://github.com/fcatools/contexts/tree/main/contexts)
+   1. Add a subfolder to the [data](https://github.com/fcatools/contexts/tree/main/data)
       directory, and add your ASCII-encoded CXT file there.
       Use a meaningful name for both (English, all lowercase, with
       two letters indicating the [ISO 639 language code](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
@@ -51,9 +51,12 @@ If you think your context is suitable, then proceed as follows:
    2. Describe your context in a metadata yaml file
       following the example of the other contexts. Try to be concise
       and precise.
-   3. Optionally: Merge the metadata automatically by running the included python script
-      ([scripts/merge_contexts_metadata.py](scripts/merge_contexts_metadata.py),
-      requires ```pyyaml```).
+   3. Optionally:
+      1. Merge the metadata automatically by running the included python script
+         ([scripts/merge_contexts_metadata.py](scripts/merge_contexts_metadata.py),
+         requires ```pyyaml```).
+      2. Prepare contexts automatically by running the included python script
+         ([scripts/prepare_contexts.py](scripts/prepare_contexts.py))
 2. Make a pull request to merge your changes into this repository.
 
 ## Further information
