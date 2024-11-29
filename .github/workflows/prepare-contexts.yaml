@@ -1,10 +1,9 @@
-name: Merge contexts metadata
+name: Prepare contexts
 
 on:
   push:
     branches:
       - main
-      - dev
   workflow_dispatch:
 
 jobs:
@@ -20,16 +19,13 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
-        run: pip install pyyaml
-
-      - name: Run merge contexts metadata script
-        run: python scripts/merge_contexts_metadata.py
+      - name: Run prepare contexts script
+        run: python scripts/prepare_contexts.py
 
       - name: Commit and push changes if any
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add merged-contexts-metadata.yaml
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update contexts metadata file"
+          git add contexts/
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update contexts"
           git push

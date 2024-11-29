@@ -1,4 +1,4 @@
-import os
+import pathlib
 
 import yaml
 
@@ -14,9 +14,9 @@ def merge_yaml_files(input_directory, output_file, comment=None):
 
     Parameters:
     -----------
-    input_directory : str
+    input_directory : pathlib.Path or str
         The path to the directory containing YAML files to merge.
-    output_file : str
+    output_file : pathlib.Path or str
         The path where the merged YAML file will be saved.
     comment : str (optional)
         A comment to add at the top of the output YAML file.
@@ -41,12 +41,15 @@ def merge_yaml_files(input_directory, output_file, comment=None):
     -----
     The merged data will overwrite any existing content in the output file.
     """
+    if isinstance(input_directory, str):
+        input_directory = pathlib.Path(input_directory)
+
     merged_data = {}
 
-    for root, _, files in os.walk(input_directory):
+    for root, _, files in input_directory.walk():
         for file_name in files:
-            if file_name.endswith('.yaml') or file_name.endswith('.yml'):
-                file_path = os.path.join(root, file_name)
+            file_path = root / file_name
+            if ".yaml" in file_path.suffixes or ".yml" in file_path.suffixes:
                 with open(file_path, mode='r') as f:
                     try:
                         data = yaml.safe_load(f)
@@ -61,7 +64,7 @@ def merge_yaml_files(input_directory, output_file, comment=None):
 
 
 if __name__ == "__main__":
-    input_dir = "contexts"
+    input_dir = "data"
     output_file = "merged-contexts-metadata.yaml"
     comment = "This is the automatically merged metadata. Please do not modify it directly."
     merge_yaml_files(input_dir, output_file, comment)
